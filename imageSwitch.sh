@@ -2,7 +2,7 @@
 
 # important for finding dbus if you are using the script with cron
 # change this to point to your specific UI session
-uiSession="cinnamon-sessio"
+uiSession="gnome-session-b"
 # location of the folder with your background pictures
 imagePath="$HOME/.tilixBackgrounds"
 
