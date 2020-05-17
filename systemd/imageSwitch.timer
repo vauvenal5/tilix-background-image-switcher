@@ -1,0 +1,9 @@
+[Unit]
+Description=Triggers Tilix imageSwitch service every 5min.
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=5min 
+
+[Install]
+WantedBy=timers.target

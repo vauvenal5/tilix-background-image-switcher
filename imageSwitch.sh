@@ -1,12 +1,14 @@
+#!/bin/sh
 # if used with cron do not forget to set up the cron job ;)
 
 # important for finding dbus if you are using the script with cron
 # change this to point to your specific UI session
-uiSession="gnome-session-b"
+# uiSession="gnome-session-b" # gnome
+uiSession="plasma_session" # plasma
 # location of the folder with your background pictures
 imagePath="$HOME/.tilixBackgrounds"
 
-# this two lines are only neccessary when used with cron
+# this two lines are only neccessary when used with cron/systemd to find the dbus of the current user
 PID=$(pgrep "$uiSession")
 export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ | tr '\0' '\n' | cut -d= -f2-)
 

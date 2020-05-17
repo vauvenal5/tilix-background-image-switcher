@@ -1,0 +1,8 @@
+[Unit]
+Description=Switches background image of Tilix.
+ConditionFileIsExecutable=/path/to/imageSwitch.sh
+
+[Service]
+Type=oneshot
+User=
+ExecStart=/path/to/imageSwitch.sh
