@@ -4,5 +4,4 @@ ConditionFileIsExecutable=/path/to/imageSwitch.sh
 
 [Service]
 Type=oneshot
-User=
 ExecStart=/path/to/imageSwitch.sh
