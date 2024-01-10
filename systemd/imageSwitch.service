@@ -4,4 +4,4 @@ ConditionFileIsExecutable=/path/to/imageSwitch.sh
 
 [Service]
 Type=oneshot
-ExecStart=/path/to/imageSwitch.sh
+ExecStart=/path/to/imageSwitch.sh /path/to/your/backgrounds true

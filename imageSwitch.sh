@@ -1,7 +1,25 @@
-#!/bin/sh
+#!/bin/bash
 
-# location of the folder with your background pictures
-imagePath="$HOME/.tilixBackgrounds"
+if test "$#" -eq 1; then
+  echo 'Usage: $0 [path random]'
+  echo ''
+  echo 'path          Path where your backgrounds are stored. (Default: $HOME/.tilixBackgrounds)'
+  echo 'random        true: Choose randomly a next image.'
+  echo '              false: Iterate through images in folder. (Default)'
+  echo ''
+  echo 'No args starts script with defaults.'
+  exit 1
+fi
+
+if test "$#" -ne 2; then
+  # legacy support
+  imagePath="$HOME/.tilixBackgrounds"
+  randomMode="false"
+else
+  # parameter mode
+  imagePath="$1"
+  randomMode="$2"
+fi
 
 # Cron DBUS discovery block
 # when used with cron or as global systemd service instead of user service, the following is needed to find the dbus of the current user
@@ -19,18 +37,26 @@ key="/com/gexperts/Tilix/background-image"
 selected=$(dconf read $key)
 echo "old: $selected"
 
-for ((i=0; i<${#pics[@]}; i++)); do
-	if [ "'${pics[$i]}'" = "$selected" ]
-  then
-    file="${pics[0]}"
+if [ "$randomMode" = "true" ]
+then
+  numberPics=${#pics[@]}
+  newIndex=$(($RANDOM % $numberPics))
 
-    if (($i+1<${#pics[@]}))
+  file="${pics[$newIndex]}"
+else
+  for ((i=0; i<${#pics[@]}; i++)); do
+    if [ "'${pics[$i]}'" = "$selected" ]
     then
-      file="${pics[$i+1]}"
-    fi
+      file="${pics[0]}"
 
-    echo "new: '$file'"
-    dconf write $key "'$file'"
-    break
-	fi
-done
+      if (($i+1<${#pics[@]}))
+      then
+        file="${pics[$i+1]}"
+      fi
+      break
+    fi
+  done
+fi
+
+echo "new: '$file'"
+dconf write $key "'$file'"

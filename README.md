@@ -1,12 +1,10 @@
 # tilix-background-image-switcher
 Script for changing periodically the background image of tilix.
 
-In the script you can change the path to your images by changing the `imagePath` variable.
-
 ## Systemd Timer Support
 If you want to use a systemd timer you can use the prepared service and timer files from the systemd folder. This is prefered to cron because you can run the service in the context of the current user and do not have to search for the current DBUS address.
 
-You will have to adapt the path in the service-file to point to your location of `imageSwitch.sh`.
+You will have to adapt the path in the service-file to point to your location of `imageSwitch.sh` and also configure the path to your background images.
 
 Then copy the service- and timer-file to `~/.config/systemd/user` and enable+start the timer as a user service. To start and enable as a user service run the following commands (no root required):
 ```bash
